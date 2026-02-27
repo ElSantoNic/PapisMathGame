@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+
+body {
+    font-family: 'Fredoka One', cursive;
+    background-color: #1a1a2e;
+    touch-action: manipulation;
+}
+
+button {
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    cursor: pointer;
+}
+
+.bounce-in {
+    animation: bounceIn 0.5s cubic-bezier(0.36, 0, 0.66, -0.56) both;
+}
+
+@keyframes bounceIn {
+    0% { transform: scale(0.3); opacity: 0; }
+    50% { transform: scale(1.05); opacity: 1; }
+    70% { transform: scale(0.9); }
+    100% { transform: scale(1); }
+}
+
+.shake {
+    animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+@keyframes shake {
+    10%, 90% { transform: translate3d(-1px, 0, 0); }
+    20%, 80% { transform: translate3d(2px, 0, 0); }
+    30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+    40%, 60% { transform: translate3d(4px, 0, 0); }
+}
+
+.feedback-pop {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 50;
+    pointer-events: none;
+}
+
+/* Hide scrollbar for history but allow scrolling */
+#history-list::-webkit-scrollbar {
+    display: none;
+}
+#history-list {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* Mode toolbar & buttons */
+.mode-btn {
+    background-color: #2563eb; /* blue-600 */
+    color: #ffffff;
+    border: 2px solid rgba(255,255,255,0.06);
+    box-shadow: 0 6px 0 rgba(37,99,235,0.9);
+    font-weight: 700;
+    transition: transform 0.08s ease, box-shadow 0.08s ease, background-color 0.12s;
+    cursor: pointer;
+}
+.mode-btn:active { transform: translateY(2px) scale(0.995); box-shadow: 0 3px 0 rgba(37,99,235,0.9); }
+.mode-btn.active {
+    background-color: #1e40af; /* blue-800 */
+    box-shadow: 0 8px 0 rgba(30,64,175,1);
+    border-color: rgba(255,255,255,0.12);
+}
+
+/* Responsive adjustments */
+#question {
+    /* ensure question scales nicely on small screens */
+    font-size: clamp(2.5rem, 9vw, 6.5rem) !important;
+    line-height: 1;
+    word-break: break-word;
+    white-space: normal;
+}
+
+#answer-input {
+    font-size: clamp(1.4rem, 7.5vw, 3.5rem) !important;
+    padding-top: clamp(.6rem, 2.5vw, 1.5rem);
+    padding-bottom: clamp(.6rem, 2.5vw, 1.5rem);
+}
+
+#history-list {
+    max-height: clamp(8rem, 28vh, 20rem);
+}
+
+/* Stack toolbar buttons and make them full width on very small screens */
+@media (max-width: 420px) {
+    #mode-toolbar {
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: stretch;
+    }
+    .mode-btn {
+        width: 100%;
+        padding: 0.6rem 0.75rem;
+        font-size: 0.95rem;
+    }
+    #submit-btn {
+        padding: 0.7rem 0.8rem;
+        font-size: 1.25rem;
+    }
+}
+
+/* Slight layout breathing on medium screens */
+@media (min-width: 421px) and (max-width: 768px) {
+    #mode-toolbar { gap: 0.5rem; }
+}
